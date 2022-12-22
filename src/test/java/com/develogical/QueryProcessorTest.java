@@ -45,5 +45,10 @@ public class QueryProcessorTest {
         assertThat(queryProcessor.process("Which of the following numbers is both a square and a cube: 1431, 100, 4074, 1, 1133, 2197, 274?"), containsString("1"));
     }
 
+    @Test
+    public void knowsMinue() throws Exception {
+        assertThat(queryProcessor.process("What is 320 minus 3?"), containsString("317"));
+    }
+
 
 }

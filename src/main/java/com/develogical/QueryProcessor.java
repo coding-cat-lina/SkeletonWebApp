@@ -19,6 +19,33 @@ public class QueryProcessor {
         }
         return false;
     }
+    static boolean checkForPrime(int inputNumber)
+    {
+        boolean isItPrime = true;
+
+        if(inputNumber <= 1)
+        {
+            isItPrime = false;
+
+            return isItPrime;
+        }
+        else
+        {
+            for (int i = 2; i<= inputNumber/2; i++)
+            {
+                if ((inputNumber % i) == 0)
+                {
+                    isItPrime = false;
+
+                    break;
+                }
+            }
+
+            return isItPrime;
+        }
+    }
+
+
 
     public String process(String query) {
 
@@ -63,6 +90,14 @@ public class QueryProcessor {
             String[] nums = replace.split(", ");
             List<Integer> int_nums = Arrays.stream(nums).map(Integer::valueOf).collect(Collectors.toList());
             Optional<Integer> result = int_nums.stream().filter(a -> isRootInteger(a, 2) && Math.round(Math.cbrt(a))==Math.cbrt(a)).findFirst();
+            return String.valueOf(result.get());
+        }
+        //Which of the following numbers are primes: 83, 0, 94, 4, 72?
+        if (query.toLowerCase().contains("primes")) {
+            String replace = query.replace("Which of the following numbers are primes: ", "").replace("?", "");
+            String[] nums = replace.split(", ");
+            List<Integer> int_nums = Arrays.stream(nums).map(Integer::valueOf).collect(Collectors.toList());
+            Optional<Integer> result = int_nums.stream().filter(QueryProcessor::checkForPrime).findFirst();
             return String.valueOf(result.get());
         }
 
