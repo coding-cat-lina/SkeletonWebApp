@@ -43,6 +43,13 @@ public class QueryProcessor {
             int num = Integer.parseInt(splits[0]) + Integer.parseInt(splits[1]);
             return String.valueOf(num);
         }
+        if (query.toLowerCase().contains("minus")) {
+            String[] splits = query.split(" minus ");
+            splits[0] = splits[0].replace("What is ", "");
+            splits[1] = splits[1].replace("?", "");
+            int num = Integer.parseInt(splits[0]) - Integer.parseInt(splits[1]);
+            return String.valueOf(num);
+        }
         if (query.toLowerCase().contains("multiplied")) {
             String[] splits = query.split(" multiplied by ");
             splits[0] = splits[0].replace("What is ", "");
@@ -50,7 +57,7 @@ public class QueryProcessor {
             int num = Integer.parseInt(splits[0]) * Integer.parseInt(splits[1]);
             return String.valueOf(num);
         }
-        //Which of the following numbers is both a square and a cube: 64, 2354, 3492, 4489, 3987, 3387, 1331?
+
         if (query.toLowerCase().contains("both a square and a cube")) {
             String replace = query.replace("Which of the following numbers is both a square and a cube: ", "").replace("?", "");
             String[] nums = replace.split(", ");
