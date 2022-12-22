@@ -26,6 +26,13 @@ public class QueryProcessor {
             List<Integer> int_nums = Arrays.stream(nums).map(Integer::valueOf).collect(Collectors.toList());
             return Collections.max(int_nums).toString();
         }
+        if (query.toLowerCase().contains("plus")) {
+            String[] splits = query.split(" plus ");
+            splits[0] = splits[0].replace("What is ", "");
+            splits[1] = splits[1].replace("?", "");
+            int num = Integer.parseInt(splits[0]) + Integer.parseInt(splits[1]);
+            return String.valueOf(num);
+        }
 
         return "";
     }

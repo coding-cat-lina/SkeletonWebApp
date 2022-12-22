@@ -30,6 +30,11 @@ public class QueryProcessorTest {
         assertThat(queryProcessor.process("Which of the following numbers is the largest: 47, 59, 68?"), containsString("68"));
     }
 
+    @Test
+    public void knowsSum() throws Exception {
+        assertThat(queryProcessor.process("What is 4 plus 19?"), containsString("23"));
+    }
+
 
 
 }
