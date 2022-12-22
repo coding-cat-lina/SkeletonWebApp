@@ -50,5 +50,10 @@ public class QueryProcessorTest {
         assertThat(queryProcessor.process("What is 320 minus 3?"), containsString("317"));
     }
 
+    ////Which of the following numbers are primes: 83, 0, 94, 4, 72?
+    @Test
+    public void knowsPrimes() throws Exception {
+        assertThat(queryProcessor.process("Which of the following numbers are primes: 42, 12, 25, 73, 18?"), containsString("73"));
+    }
 
 }
