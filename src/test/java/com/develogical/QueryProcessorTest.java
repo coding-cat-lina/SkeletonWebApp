@@ -21,8 +21,8 @@ public class QueryProcessorTest {
     }
 
     @Test
-    public void knowsAboutGoogle(){
-        assertThat(queryProcessor.process("Google"), containsString("search engine"));
+    public void knowsTeamName() throws Exception {
+        assertThat(queryProcessor.process("What is your name?"), containsString("Cat"));
     }
 
 }
