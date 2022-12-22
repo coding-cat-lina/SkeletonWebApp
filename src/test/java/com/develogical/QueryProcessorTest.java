@@ -35,6 +35,15 @@ public class QueryProcessorTest {
         assertThat(queryProcessor.process("What is 3 plus 20?"), containsString("23"));
     }
 
+    @Test
+    public void knowsProduct() throws Exception {
+        assertThat(queryProcessor.process("What is 72 multiplied by 27?"), containsString("1944"));
+    }
+
+    @Test
+    public void knowsCube() throws Exception {
+        assertThat(queryProcessor.process("Which of the following numbers is both a square and a cube: 64, 1296, 2718, 1630, 3660, 729, 4486?"), containsString("64"));
+    }
 
 
 }

@@ -3,12 +3,22 @@ package com.develogical;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.BinaryOperator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class QueryProcessor {
+
+    public static boolean isRootInteger(int number, int root) {
+        double dResult = Math.pow(number, 1.0 / root);
+
+        if ((dResult == Math.floor(dResult)) && !Double.isInfinite(dResult)) {
+            return true;
+        }
+        return false;
+    }
 
     public String process(String query) {
 
@@ -39,6 +49,14 @@ public class QueryProcessor {
             splits[1] = splits[1].replace("?", "");
             int num = Integer.parseInt(splits[0]) * Integer.parseInt(splits[1]);
             return String.valueOf(num);
+        }
+        //Which of the following numbers is both a square and a cube: 64, 2354, 3492, 4489, 3987, 3387, 1331?
+        if (query.toLowerCase().contains("both a square and a cube")) {
+            String replace = query.replace("Which of the following numbers is both a square and a cube: ", "").replace("?", "");
+            String[] nums = replace.split(", ");
+            List<Integer> int_nums = Arrays.stream(nums).map(Integer::valueOf).collect(Collectors.toList());
+            Optional<Integer> result = int_nums.stream().filter(a -> isRootInteger(a, 2) && Math.round(Math.cbrt(a))==Math.cbrt(a)).findFirst();
+            return String.valueOf(result.get());
         }
 
         return "";
