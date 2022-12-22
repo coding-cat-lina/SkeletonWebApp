@@ -33,6 +33,13 @@ public class QueryProcessor {
             int num = Integer.parseInt(splits[0]) + Integer.parseInt(splits[1]);
             return String.valueOf(num);
         }
+        if (query.toLowerCase().contains("multiplied")) {
+            String[] splits = query.split(" multiplied by ");
+            splits[0] = splits[0].replace("What is ", "");
+            splits[1] = splits[1].replace("?", "");
+            int num = Integer.parseInt(splits[0]) * Integer.parseInt(splits[1]);
+            return String.valueOf(num);
+        }
 
         return "";
     }
