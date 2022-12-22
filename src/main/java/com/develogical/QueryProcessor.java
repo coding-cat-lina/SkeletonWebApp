@@ -1,9 +1,12 @@
 package com.develogical;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.function.BinaryOperator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class QueryProcessor {
 
@@ -16,6 +19,12 @@ public class QueryProcessor {
         }
         if (query.toLowerCase().contains("your name")) {
             return "Cat";
+        }
+        if (query.toLowerCase().contains("largest")) {
+            String s = query.split(": ")[1].replace("?", "");
+            String[] nums = s.split(", ");
+            List<Integer> int_nums = Arrays.stream(nums).map(Integer::valueOf).collect(Collectors.toList());
+            return Collections.max(int_nums).toString();
         }
 
         return "";
